@@ -2,6 +2,9 @@ import java.awt.*;
 import java.applet.*;
 import java.awt.event.*;
 
+import org.python.util.PythonInterpreter;
+import org.python.core.*; 
+
 public class Principal 
 extends Applet implements ActionListener {
 
@@ -31,4 +34,12 @@ extends Applet implements ActionListener {
 		repaint();
 				
 	}
+	
+	public void interpreta(String s){
+		PythonInterpreter interp =
+		    new PythonInterpreter();
+		
+		interp.exec(s)
+	}
+	
 }
