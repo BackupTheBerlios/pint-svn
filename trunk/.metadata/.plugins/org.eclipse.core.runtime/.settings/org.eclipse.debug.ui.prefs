@@ -1,0 +1,3 @@
+#Thu Jun 29 17:17:42 GMT+01:00 2006
+eclipse.preferences.version=1
+org.eclipse.debug.ui.PREF_LAUNCH_PERSPECTIVES=<?xml version\='1.0'?>\n<launchPerspectives>\n    <launchPerspective configurationType\='org.eclipse.jdt.launching.javaApplet' mode\='run' perspective\='org.eclipse.jdt.ui.JavaBrowsingPerspective'/>\n</launchPerspectives>
