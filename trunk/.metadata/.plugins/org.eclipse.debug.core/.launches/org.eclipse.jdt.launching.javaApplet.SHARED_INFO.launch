@@ -1,5 +1,0 @@
-<?xml version='1.0'?>
-<launchConfiguration type='org.eclipse.jdt.launching.javaApplet'>
-    <booleanAttribute key='org.eclipse.debug.ui.private' value='true'/>
-    <stringAttribute key='run' value='org.eclipse.jdt.ui.JavaBrowsingPerspective'/>
-</launchConfiguration>

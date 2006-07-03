@@ -1,7 +1,0 @@
-#Thu Jun 29 17:33:30 GMT+01:00 2006
-org.eclipse.jdt.core.classpathVariable.JRE_LIB=/usr/lib/jvm/java-1.5.0-sun-1.5.0.06/jre/lib/rt.jar
-org.eclipse.jdt.core.classpathVariable.JRE_SRC=
-eclipse.preferences.version=1
-org.eclipse.jdt.core.builder.resourceCopyExclusionFilter=*.launch
-org.eclipse.jdt.core.classpathVariable.JRE_SRCROOT=
-org.eclipse.jdt.core.codeComplete.visibilityCheck=enabled

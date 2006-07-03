@@ -1,9 +1,0 @@
-/home/aluno/workspace/.metadata/.plugins/org.eclipse.jdt.core/2626961800.index
-/home/aluno/workspace/.metadata/.plugins/org.eclipse.jdt.core/829742862.index
-/home/aluno/workspace/.metadata/.plugins/org.eclipse.jdt.core/1002433375.index
-/home/aluno/workspace/.metadata/.plugins/org.eclipse.jdt.core/3386630248.index
-/home/aluno/workspace/.metadata/.plugins/org.eclipse.jdt.core/3861594584.index
-/home/aluno/workspace/.metadata/.plugins/org.eclipse.jdt.core/3880114805.index
-/home/aluno/workspace/.metadata/.plugins/org.eclipse.jdt.core/2748091095.index
-/home/aluno/workspace/.metadata/.plugins/org.eclipse.jdt.core/1745919147.index
-/home/aluno/workspace/.metadata/.plugins/org.eclipse.jdt.core/4109117314.index
