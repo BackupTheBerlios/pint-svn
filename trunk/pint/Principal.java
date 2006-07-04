@@ -45,6 +45,9 @@ extends Applet implements ActionListener {
 		repaint();
 	}
 	
+	public String captura() {
+		return outputText.getText();
+	}
 	
 	public void interpreta(String s){
 		

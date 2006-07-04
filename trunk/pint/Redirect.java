@@ -15,6 +15,7 @@ public Redirect() {super();}
 
 
 public void write( int b ) throws IOException {
+	
     textControl.append(String.valueOf((char)b));
 }
 
