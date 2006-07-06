@@ -1,64 +1,43 @@
-import java.awt.*;
 import java.applet.*;
-import java.awt.event.*;
 import java.io.*;
 import org.python.util.PythonInterpreter;
-import org.python.core.*; 
+
+//import org.python.core.*; 
 
 public class Principal 
-extends Applet implements ActionListener {
+extends Applet {
 
-	private Button botao = new Button("Executar");
-	TextField inputText = new TextField("", 30);
-	TextArea outputText = new TextArea(5, 50);
-	PythonInterpreter interp = new PythonInterpreter();
+	//private Button botao = new Button("Executar");
+	//TextField inputText = new TextField("", 30);
+	// TextArea outputText = new TextArea(40, 50);
 	
+	PythonInterpreter interp;
+	Redirect r;
+	PrintStream out;
 	
 	
 	
 	public void init(){
-		PrintStream out = new PrintStream( new Redirect( outputText ) );
-		
-		add(botao);
-		add(inputText);
-		add(outputText);
-
+		interp = new PythonInterpreter();
+		r = new Redirect();
+		out = new PrintStream(r);
+		//add(outputText);
+	
 		interp.setOut(out);
-		botao.addActionListener(this);
-		//System.setOut(out);
-		//System.setErr(out);
+		//System.out.println("OI"+interpreta("print 123"));
+		//outputText.append(interpreta("print 123"));
 		
 	}
-	
-	public void paint(Graphics g) {
-		// g.setColor(black);
-		// g.drawLine(0,0,50,40);
-		g.drawString("Jython Interactive Console", 5, 5);
-	}
-	
-	public void actionPerformed(ActionEvent e){
-		if (e.getSource() == botao){
-			
-			interpreta(inputText.getText().trim());
-			
-		}
-		repaint();
-	}
-	
-	public String captura() {
-		return outputText.getText();
-	}
-	
-	public void interpreta(String s){
+
+
+		
+	public String interpreta(String s){
 		
 		
-		//interp.setOut()
-		
-		s= "a=5\nb=6\nif b>a:\t print b";
 		interp.exec(s);
-		
+		return r.getText();
 		// repaint
-		repaint();
+		//repaint();
 
 	}
 

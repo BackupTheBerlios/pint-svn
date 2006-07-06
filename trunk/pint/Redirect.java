@@ -1,22 +1,33 @@
 import java.io.IOException;
 import java.io.OutputStream;
-import java.awt.*;
-import java.applet.*;
 
 public class Redirect extends OutputStream {
 
-	private TextArea textControl;
+	public String text;
+	public String aString;
 	
-	public Redirect (TextArea control) {
-        textControl = control;
+	public Redirect () {
+		
+        super();
     }
 	
-public Redirect() {super();}
 
-
-public void write( int b ) throws IOException {
+	public void write(int b ) throws IOException {
+		text = String.valueOf((char)b);
+		//aString = new String(b);
+		
+		
+	}
+	public void write(byte b[], int off, int len) throws IOException {
+         aString = new String(b , off , len);
+        
+        
+	}
 	
-    textControl.append(String.valueOf((char)b));
-}
+	public String getText() {
+		
+		return aString;
+		
+	}
 
 }
