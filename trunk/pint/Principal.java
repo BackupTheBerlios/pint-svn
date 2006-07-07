@@ -1,46 +1,80 @@
+
 import java.applet.*;
 import java.io.*;
 import org.python.util.PythonInterpreter;
-
+import java.awt.*;
+import java.awt.event.*;
 //import org.python.core.*; 
 
-public class Principal 
-extends Applet {
-
-	//private Button botao = new Button("Executar");
+public class Principal extends Applet
+{
+	private Button botao = new Button("Executar");
 	//TextField inputText = new TextField("", 30);
-	// TextArea outputText = new TextArea(40, 50);
+	TextArea outputText = new TextArea(20, 20);
+
+	private PythonInterpreter interp;
+	private Redirect r;
+	private PrintStream out;
+
+	private volatile String code = null;
+	private volatile boolean executed;
+
+	public void setCode(String code)
+	{
+		this.code = code;
+		executed = false;
+	}
 	
-	PythonInterpreter interp;
-	Redirect r;
-	PrintStream out;
-	
-	
-	
-	public void init(){
+	public String getOutput()
+	{
+		while (!executed);
+		String output = r.getText();
+		r.clearText();
+		outputText.append("\n++ " + output);
+		executed = false;
+		return output;
+	}
+
+	public void init()
+	{
 		interp = new PythonInterpreter();
 		r = new Redirect();
 		out = new PrintStream(r);
-		//add(outputText);
-	
 		interp.setOut(out);
-		//System.out.println("OI"+interpreta("print 123"));
-		//outputText.append(interpreta("print 123"));
 		
+		add(outputText);
+		add(botao);
+		botao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				code ="print \"fodasse!\"";
+				getOutput();				
+			}
+		});
+		
+
+		Thread thread = new Thread() {
+			public void run()
+			{
+				while (true) {
+					if (code != null) {
+						outputText.append("\n>> " + code);
+						interp.exec(code);
+						executed = true;
+						code = null;
+					}
+				}
+			}
+		};
+		thread.start();
+
+		code ="for i in xrange(1,10):\n\tprint i";
+		this.getOutput();
 	}
+	
 
-
-		
-	public String interpreta(String s){
-		
-		
+	public String interpreta(String s)
+	{
 		interp.exec(s);
 		return r.getText();
-		// repaint
-		//repaint();
-
 	}
-
-	
-	
 }

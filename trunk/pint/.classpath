@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry excluding="jython/" kind="src" path=""/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/home/aluno/jython-2.1/jython.jar"/>
+	<classpathentry kind="con" exported="true" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" exported="true" path="/home/aluno/workspace/pint/jython.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
