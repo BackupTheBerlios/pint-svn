@@ -1,20 +1,23 @@
 
 import java.applet.*;
 import java.io.*;
-import org.python.util.PythonInterpreter;
-import java.awt.*;
-import java.awt.event.*;
+//import org.python.core.*;
+import org.python.util.*;
+//import java.awt.*;
+
 //import org.python.core.*; 
 
 public class Principal extends Applet
 {
-	private Button botao = new Button("Executar");
+	//private Button botao = new Button("Executar");
 	//TextField inputText = new TextField("", 30);
-	TextArea outputText = new TextArea(20, 20);
+	//TextArea outputText = new TextArea(20, 20);
 
-	private PythonInterpreter interp;
+	//private PythonInterpreter interp;
+	private InteractiveInterpreter iinterp;
 	private Redirect r;
 	private PrintStream out;
+	//PyStringMap locals ;
 
 	private volatile String code = null;
 	private volatile boolean executed;
@@ -30,51 +33,38 @@ public class Principal extends Applet
 		while (!executed);
 		String output = r.getText();
 		r.clearText();
-		outputText.append("\n++ " + output);
+		//outputText.append("\n++ " + output);
 		executed = false;
 		return output;
 	}
 
 	public void init()
 	{
-		interp = new PythonInterpreter();
+		iinterp  = new InteractiveInterpreter();
+	
 		r = new Redirect();
 		out = new PrintStream(r);
-		interp.setOut(out);
-		
-		add(outputText);
-		add(botao);
-		botao.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				code ="print \"fodasse!\"";
-				getOutput();				
-			}
-		});
-		
-
+		iinterp.setErr(out);
+		iinterp.setOut(out);
+			
 		Thread thread = new Thread() {
-			public void run()
+			public void run()  
 			{
 				while (true) {
 					if (code != null) {
-						outputText.append("\n>> " + code);
-						interp.exec(code);
-						executed = true;
+						
+						iinterp.runsource(code+"\n");
+						
+						executed = true;					
 						code = null;
 					}
 				}
 			}
 		};
 		thread.start();
-
-		code ="for i in xrange(1,10):\n\tprint i";
-		this.getOutput();
+		
 	}
-	
-
-	public String interpreta(String s)
-	{
-		interp.exec(s);
-		return r.getText();
 	}
-}
+
+
+
