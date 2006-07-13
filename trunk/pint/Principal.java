@@ -7,7 +7,6 @@ import java.awt.*;
 import java.awt.FileDialog;
 
 
-
 //import org.python.core.*; 
 
 public class Principal extends Applet
@@ -15,7 +14,7 @@ public class Principal extends Applet
 	//private Button botao = new Button("Executar");
 	//TextField inputText = new TextField("", 30);
 	//TextArea outputText = new TextArea(20, 20);
-
+	static String filename=null;
 	private PythonInterpreter interp;
 	private InteractiveInterpreter iinterp;
 	private Redirect r;
@@ -76,60 +75,89 @@ public class Principal extends Applet
 		
 	}
 	
-public void Load() {
+public String Load() {
 
-	Opent = new Thread() {
-		public void run() {
-	
 	j = new Frame();
-	FileDialog filedia = new FileDialog(j, "Open..", FileDialog.SAVE);
+	PrintStream p;
+	
+	String cont = null;	
+	
+	
+	FileDialog filedia = new FileDialog(j, "Open..", FileDialog.LOAD);
 	filedia.setFile("*.*");
 	filedia.show();
-	String filename = filedia.getFile();
-	if (filename != null) {
-	  
-	}
+	filename = filedia.getDirectory()+ "" + filedia.getFile();
 	filedia.dispose();
+
+
+	
+
+		try {
+			if (filename != null ){
+			
+			File f = new File(filename);
+			FileInputStream fin = new FileInputStream (filename);
+			DataInputStream in = 
+                new DataInputStream(fin);
+			
+			while (in.available() !=0)
+			{
+             cont += in.readLine();                      
+				
+			}
+						
+			}
+
+			
+		}
+		catch(IOException iox) {
+			System.out.println("E: I/O error...");
+			iox.printStackTrace();
+
+		}
+	
+	return cont;
+	
 }
-	}; Opent.start();
-}
+	
 
 public void Save(String codepy) {
-	final String code_all;
-	code_all = codepy;
-	Savet = new Thread() {
-		
-		public void run () {
-			
-			FileDialog filedia = new FileDialog(new Frame(), "Save..", FileDialog.SAVE);
+	
+	j = new Frame();
+
+	FileOutputStream out; // declare a file output object
+    PrintStream p; // declare a print stream object
+    
+			FileDialog filedia = new FileDialog(j, "Save..", FileDialog.SAVE);
 			filedia.setFile("*.*");
 			filedia.show();
-			String filename = filedia.getFile();
+			
+			filedia.dispose();
 			
 			try {
 			
 			
-			
-			if (filename != null) {
-				File outputFile = new File(filename);
-				FileWriter out = new FileWriter(outputFile);
-				out.write(code_all);
+				out = new FileOutputStream(filedia.getDirectory()+ ""+ filedia.getFile());
+
+                // Connect print stream to the output stream
+                p = new PrintStream( out );
+                p.println(codepy);
+                p.close();
+				
+				
 				
 			  
 			}
-			}
+			
 			
 			catch(IOException iox) {
 				System.out.println("E: I/O error...");
 				iox.printStackTrace();
 			}
 			
-			filedia.dispose();
-		}
-			
-			}; Savet.start();
 			
 		}
+			
 	
 	}
 
