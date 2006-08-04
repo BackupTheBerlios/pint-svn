@@ -3,5 +3,6 @@
 	<classpathentry excluding="jython/" kind="src" path=""/>
 	<classpathentry kind="con" exported="true" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" exported="true" path="/home/aluno/workspace/pint/jython.jar"/>
+	<classpathentry kind="lib" exported="true" path="/home/aluno/Desktop/jar/plugin.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

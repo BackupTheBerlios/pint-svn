@@ -1,26 +1,31 @@
 
 import java.applet.*;
 import java.io.*;
-import java.security.PrivilegedActionException;
 //import org.python.core.*;
 import org.python.util.*;
 import java.awt.*;
-
+import javax.swing.*;
+import netscape.javascript.*;
+import javax.swing.JComponent;
 
 //import org.python.core.*; 
 
 @SuppressWarnings("serial")
-public class Principal extends Applet
+public class Principal extends JApplet 
 {
 	//private Button botao = new Button("Executar");
 	//TextField inputText = new TextField("", 30);
 	//TextArea outputText = new TextArea(20, 20);
-	static String filename=null;
 	
-	InteractiveInterpreter iinterp = new InteractiveInterpreter();
-	PythonInterpreter pint = new PythonInterpreter();
-	Redirect r = new Redirect();
-	PrintStream out = new PrintStream(r);
+	private JButton newFile;
+	private JButton loadFile;
+	private JButton saveFile;
+	private JButton highLight;
+	private JButton runFile;
+
+	InteractiveInterpreter it;
+	Redirect r;
+	PrintStream out; 
 	
 	
 	Frame j;
@@ -30,20 +35,9 @@ public class Principal extends Applet
 	
 	private volatile String code = null;
 	private volatile boolean executed;
-	private volatile boolean fileNeedsExecute;
+	
 
-	
-	public String getFilename(){
-		
-		return filename;
-		
-	}
-	
-	public void executeFile()
-	{
-		fileNeedsExecute = true;
-	}
-	
+
 	public void setCode(String code)
 	{
 		
@@ -67,30 +61,92 @@ public class Principal extends Applet
 		
 	}
 
-	
-	public void init()
+	private void evalJavascript(String expression)
 	{
+		JSObject.getWindow(this).eval(expression);
+	}
+
+	private Object callJavascriptFunction(String function, Object[] args)
+	{
+		return JSObject.getWindow(this).call(function, args);
+	}
+	
+	private void init_buttons() {
+		loadFile.addActionListener(new java.awt.event.ActionListener() {
+        	public void actionPerformed(java.awt.event.ActionEvent e) {
+        		// load file
+        		String texto = Load();
+        		//evalJavascript("setEditorContent(\""+ texto + "\");");
+        		callJavascriptFunction("setEditorContent", new Object[] {texto} );
+        	}
+		});
+		saveFile.addActionListener(new java.awt.event.ActionListener() {
+	        public void actionPerformed(java.awt.event.ActionEvent e) {
+	        	System.out.println("...");
+	        	String texto = (String)callJavascriptFunction("getEditorContent", null);
+	        	System.out.println("texto: " + texto);
+	        	Save(texto);
+	        }
+		});
+		runFile.addActionListener(new java.awt.event.ActionListener() {
+	        public void actionPerformed(java.awt.event.ActionEvent e) {
+	        	// ---
+	        }
+		});
+	}
+	
+	public void init() 
+	{
+		// Instanciar classes;
+//		// Imagens para os botoes..
+		ImageIcon newF = new ImageIcon("images/document-new.png");
+		ImageIcon openF = new ImageIcon("images/document-open.png");
+		ImageIcon SaveF = new ImageIcon("images/document-save-as.png");
+		ImageIcon high = new ImageIcon("images/document-properties.png");
+		ImageIcon runF = new ImageIcon("images/media-playback-start.png");
 		
-		iinterp.setErr(out);
-		iinterp.setOut(out);
+		//SWING
+		newFile = new JButton("New", newF);
+		loadFile = new JButton("Open", openF );
+		saveFile = new JButton("Save", SaveF);
+		highLight = new JButton("Highlight", high);
+		runFile = new JButton("Run", runF);
+		
+		//ADICIONAR BUTOES
+		Container content = getContentPane();
+		content.setBackground(Color.decode("#A1C1DC"));
+	    content.setLayout(new FlowLayout());
+		
+	    content.add(newFile);
+	    content.add(loadFile);
+	    content.add(saveFile);
+	    content.add(highLight);
+	    content.add(runFile);
+
+	    setVisible(true);
+	    
+		
+		// JYTHON
+		it = new InteractiveInterpreter();
+		r = new Redirect();
+		out = new PrintStream(r);
+		// redirect output's
+		it.setOut(out);
+		it.setErr(out);
+		
+		init_buttons();
 		
 		 thread = new Thread() {
 			public void run()  
 			{
 				while (true) {
 					if (code != null) {
-						iinterp.runsource(code+"\n");
+						it.runsource(code+"\n");
 						
 						executed = true;				
 						code = null;
 					}
-					else if(fileNeedsExecute) {
-						pint.execfile(filename);
-						fileNeedsExecute = false;
-						executed = true;
-						
-						
-					}
+					
 				}
 			}
 		};
@@ -100,40 +156,12 @@ public class Principal extends Applet
 	}
 
 public void execFile(String filename){
-	pint.execfile(filename);
+	
+	it.execfile(filename);
 	
 }
 	
-/*public void execCode(String code) {
-	
-	
-	iinterp.setErr(out);
-	iinterp.setOut(out);
-	
-	try {
-	
-	if (code != null) {
-		Thread.sleep(10000);
-		iinterp.runsource(code+"\n");
-	}
-	else 
-		System.out.println("E: Cannot execute NULL code!");
 
-	}
-	
-	
-	catch ( SecurityException e) {
-		  System.out.println("E: Security Error");
-		  e.printStackTrace();
-	        } 
-	catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	
-}*/
-	
-	
 public String Load() {
 
 	j = new Frame();
@@ -142,16 +170,12 @@ public String Load() {
 	String cont = "";	
 	
 	
-	FileDialog filedia = new FileDialog(j, "Open..", FileDialog.LOAD);
-	filedia.setFile("*.*");
-	filedia.show();
-	
-	filename = filedia.getDirectory()+ "" + filedia.getFile();
-	
-	filedia.dispose();
+	JFileChooser filedia = new JFileChooser();
+	int returnVal = filedia.showOpenDialog(this);
+	if(returnVal == JFileChooser.APPROVE_OPTION) {
+	       
+	  String filename = filedia.getSelectedFile().getPath();
 
-
-	
 
 		try {
 			if (filename != null ){
@@ -181,33 +205,30 @@ public String Load() {
 			  System.out.println("E: Security Error");
 			  e.printStackTrace();
 		        }
-		
+	}
 	return cont;
 	
+  
 }
-	
 
-public void Save(String codepy) {
-	
-	j = new Frame();
 
+public void Save(String fileContents) {
 	FileOutputStream out; // declare a file output object
     PrintStream p; // declare a print stream object
     
-			FileDialog filedia = new FileDialog(j, "Save..", FileDialog.SAVE);
-			filedia.setFile("*.*");
-			filedia.show();
-			filename = filedia.getDirectory()+ "" + filedia.getFile();
-			filedia.dispose();
+			JFileChooser filedia = new JFileChooser();
+			
+			int returnVal = filedia.showSaveDialog(this);
+			if(returnVal == JFileChooser.APPROVE_OPTION) {
 			
 			try {
 			
-			
+				String filename = filedia.getSelectedFile().getPath();
 				out = new FileOutputStream(filename);
 
                 // Connect print stream to the output stream
                 p = new PrintStream( out );
-                p.println(codepy);
+                p.println(fileContents);
                 p.close();
 				
 				
@@ -230,8 +251,8 @@ public void Save(String codepy) {
 			
 		}
 			
-	
 	}
+}
 
 
 
