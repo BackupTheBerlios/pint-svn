@@ -1,0 +1,39 @@
+
+#console {
+  font: 10pt "courier new", monospace;
+  overflow: auto;
+}
+
+#console>#output {
+  white-space: pre;
+  white-space: -moz-pre-wrap;
+  margin: 0 2pt;
+}
+
+#console>#prompt {
+  position: fixed;
+  color: purple;
+  float: left;
+  margin: 10pt 6pt 0 2pt;
+}
+
+#console>#input {
+  position: fixed;
+  width: 440pt;
+  overflow: auto;
+  margin: 10pt 0 0 12pt;
+}
+
+.input {
+  color: blue;
+  font: inherit;
+  font-weight: bold;
+}
+
+#output>.normalOutput { color: green; }
+#output>.print { color: black; }
+#output>.error { color: brown; }
+#output>.propList { color: gray; }
+#output>.message { color: gray; }
+#output>.tabcomplete { color: purple; }
+

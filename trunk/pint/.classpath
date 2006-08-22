@@ -2,5 +2,7 @@
 <classpath>
 	<classpathentry excluding="jython/" kind="src" path=""/>
 	<classpathentry kind="con" exported="true" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="plugin.jar"/>
+	<classpathentry kind="lib" path="jython.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
