@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+	<head>
+		<title>PINT - ControlPanel</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+	<div id="conteneur">
+		  <div id="header">PINT - Control Panel</div>
+		  
+		  <div id="haut">
+			<ul class="menuhaut">
+				<li><a href="users.html">Users</a></li>
+				<li><a href="prob.html">Problems</a></li>
+				<li><a href="topic.html">Topics</a></li>
+				<li><a href="examples.html">Examples</a></li>
+				<li><a href="learning.html">Learning System</a></li>
+				<li><a href="admin.html"> Administration</a></li>
+			</ul>
+		  </div>
+
+		  <div id="centre">
+			<h1>Manage Learning Topics</h1>
+				
+				<!-- FORM TO ADD TOPIC -->
+				<form action="actions.py/addTopicForm" method="POST">
+					<h2> Add a Topic </h2>
+					<table>
+					<tr><td> Name </td> 
+						<td> <input type="text" name="name"> </td> </tr>
+					<tr><td> Dependency </td>				
+						<td> <input type="text" name="depTopic"> </td> </tr>
+						</table>
+						<br>
+						<input type="submit" value="Add" >	
+
+				</form>
+
+
+					</ol>
+			</div>
+	<div id="pied">P I N T </div>
+	</div>
+	</body>
+</html>

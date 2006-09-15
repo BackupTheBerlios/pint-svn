@@ -1,0 +1,192 @@
+
+@import "editor.css";
+@import "console.css";
+
+html, body {
+  font-family: arial, sans-serif;
+  font-size: 12pt;
+  background-color: #A1C1DC;
+  color: #10212E;
+  margin: 0;
+  padding-top: 0;
+}
+
+textarea {
+  position: relative;
+  font: 10pt monospace;
+  background-color: transparent;
+  color: inherit;
+  border: none;
+  padding: 0 0;
+}
+
+a {
+  color: #376F9C;
+  text-decoration: none;
+  font-size: 10pt;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #10212E;
+  text-decoration: underline;
+}
+
+a.active {
+  color: #10212E;
+}
+
+div, .title>a
+{
+  position: relative;
+  background-color: #71A2CA;
+  border-width: 2px;
+  border-color: #21415C;
+  border-style: solid;
+}
+
+input {
+  background-color: #CFE0ED;
+  color: #10212E;
+  border: solid 1px #21415C;
+}
+
+label {
+  font-size: 70%;
+  font-weight: bold;
+}
+
+input, label {
+  height: 12pt;
+  margin: 2pt 0 2pt 2pt;
+}
+
+.tooltip {
+  font-size: 8pt;
+  position: absolute;
+  display: none;
+  background-color: #A1C1DC;
+  border: 1px solid #10212E;
+  padding: 2pt 2pt;
+  z-index: 20;
+}
+
+.cutted {
+  text-decoration: line-through;
+}
+
+#header {
+  font-size: 32pt;
+  background-color: #4182B8;
+  border-style: none;
+  border-bottom: 4pt solid #71A2CA;
+  width: 100%;
+  z-index: 20;
+}
+
+#header>span {
+  padding: 4pt 0 4pt 16pt;
+}
+
+#messageLayer {
+  position: fixed;
+  background-color: #4182B8;
+  border-style: none;
+  width: 100%;
+  margin: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+#messageLayer>div {
+  background-color: #CFE0ED;
+  width: 320pt;
+  margin: auto;
+  margin-top: 64pt;
+}
+
+#mainBox {
+  background-color: transparent;
+  border-style: none;
+  width: 680pt;
+  margin: 20pt auto;
+}
+
+#tabbedBox, .rightBox {
+  background-color: transparent;
+  border-style: none;
+}
+
+#tabbedBox {
+  float: left;
+  width: 500pt;
+}
+
+.rightBox {
+  float: right;
+  width: 160pt;
+  margin-bottom: 16pt;
+}
+
+.title {
+  background-color: transparent;
+  border-style: none;
+}
+
+.title>a {
+  border-bottom-width: 0;
+  padding: 2pt 16pt 2pt 16pt;
+}
+
+#tabPane>a:hover {
+  background-color: #A1C1DC;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#tabPane>a.active, .rightBox>.title>a {
+  color: #10212E;
+  z-index: 1;
+}
+
+#tabbedBox>#contentPane {
+  height: 260pt;
+  padding: 16pt 16pt;
+}
+
+#contentPane>div {
+  position: absolute;
+  background-color: #CFE0ED;
+  color: #10212E;
+  visibility: hidden;
+  width: 460pt;
+  height: 220pt;
+}
+
+#contentPane>div.active {
+  visibility: visible;
+}
+
+#login form {
+  text-align: right;
+}
+
+#login input {
+  width: 72pt;
+}
+
+#login #submit {
+   background-color: #71A2CA;
+   width: 48pt;
+   height: 16pt;
+}
+
+#login, #topics, #problems {
+  padding: 8pt 8pt;
+}
+
+#examples textarea, #problem textarea, #solution textarea {
+  width: 460pt;
+  height: 220pt;
+}

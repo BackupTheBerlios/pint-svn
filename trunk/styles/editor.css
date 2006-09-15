@@ -1,0 +1,31 @@
+
+#editor {
+  font: 10pt monospace;
+  overflow: auto;
+  height: 200pt
+}
+
+body#editor {
+  height: 180pt;
+}
+
+#editor>#editarea {
+  position: fixed;
+  border: none;
+  width: 460pt;
+  height: 198pt;
+  margin: 0 0;
+}
+
+#editor>#statusbar {
+  position: relative;
+  margin-top: 198pt;
+  border-top: solid 1px #21415C;
+  width: 460pt;
+  height: 10pt;
+}
+
+#editor .comment { color: green; }
+#editor .keyword { color: blue; }
+#editor .number { color: brown; }
+#editor .quoted { color: magenta; }
