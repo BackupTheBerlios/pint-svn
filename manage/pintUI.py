@@ -98,13 +98,13 @@ def getUserHistory(req):
 		ssp = s.showSolvedProb(nick)
 		slp = lt.showLearnedTopic(nick)
 
-		req.write("<br> <h3> Solved Problems </h3> ")
+		req.write("<h4> Solved Problems </h4> ")
 		req.write("<ul>")
 		for i in ssp:
 			req.write("<li><a id=\"problem_" + i[1] + "\" href=\"javascript:setProblem('" + i[1] + "')\">" + i[1] + "</a></li>")
 		req.write("</ul>")
 
-		req.write("<br> <h3> Learned Topics </h3> ")
+		req.write("<h4> Learned Topics </h4> ")
 		req.write("<ul>")
 		for i in slp:
 			req.write("<li><a id=\"topic_" + i[1] + "\" href=\"javascript:setTopic('" + i[1] + "')\">" + i[1] + "</a></li>")
