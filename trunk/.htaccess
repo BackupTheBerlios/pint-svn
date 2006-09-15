@@ -1,7 +1,0 @@
-AddHandler mod_python .py
-#AddHandler mod_python .psp
-PythonHandler mod_python.publisher
-#PythonHandler mod_python.psp
-PythonDebug On
-PythonAutoReload On
-Options -Indexes
