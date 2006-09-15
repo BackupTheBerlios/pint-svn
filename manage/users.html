@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+	<head>
+		<title>PINT - ControlPanel</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+	<div id="conteneur">
+		  <div id="header">PINT - Control Panel
+		  
+		  
+		  </div>
+		  
+		  <div id="haut">
+			<ul class="menuhaut">
+				<li><a href="users.html">Users</a></li>
+				<li><a href="prob.html">Problems</a></li>
+				<li><a href="topic.html">Topics</a></li>
+				<li><a href="examples.html">Examples</a></li>
+				<li><a href="learning.html">Learning System</a></li>
+				<li><a href="admin.html"> Administration</a></li>	
+			</ul>
+		  </div>
+
+		  <div id="centre">
+			<h1>Manage Users</h1>
+				
+				<!-- FORM TO ADD USERS -->
+				<form action="actions.py/addUserForm" method="POST">
+					<h2> Add User </h2>
+
+
+					<h3> User Information: </h3>
+					<table>
+					<tr><td>	Name </td>
+					<td> <input type="text" name="username"> </td> </tr>
+					
+					<tr><td>	Nickname </td>
+						<td> <input type="text" name="nick"> </td></tr>
+						
+						<br>
+						<tr><td> Password </td>
+						<td> <input type="password" name="password"> </td></tr>
+
+						</table>
+						<br>
+					<input type="submit" value="Add" >
+
+				</form>
+
+
+
+
+
+					<h2>Remove Users</h2>
+				<!-- FORM TO DEL USERS -->
+				
+					<h3> Remove User by Nickname: </h3>
+					<br>
+					<form action="actions.py/removeUserForm" method="POST">
+  				Nickname 
+				<input type="text" name="nick">
+				<br><br>
+				<input type="submit" value="Remove" >
+					</form>
+
+
+				<!--	<h2>Show Users</h2> -->
+ 				<!-- FORM SHOW USERS -->
+				<br>
+				<h3> Query Users Database: </h3>
+				<br>
+				<form action="actions.py/showUsersForm" method="POST">
+				<input type="submit" value="Show ALL users" >
+				</form>
+
+
+
+					</ol>
+			</div>
+	<div id="pied"> P I N T </div>
+	</div>
+	</body>
+</html>
