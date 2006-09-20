@@ -1,7 +1,10 @@
-import pintdb
+import pintdb, os
 from mod_python import Session
 from mod_python import apache, util
 
+# lets go..all classes ;)
+
+print "BLAH",os.getcwd()
 x=pintdb.Users()
 p=pintdb.Problems()
 t=pintdb.Topic()

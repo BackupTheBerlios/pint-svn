@@ -1,20 +1,34 @@
 from pysqlite2 import dbapi2 as sqlite
 import mod_python
-import md5
+import md5, os.path
 
-bd = "/var/www/pint/pint8.db"
-#bd = "/var/www/pint/manage/pint6.db"
+
+# Dont know why we need to put full path to database..maybe a mod_python bug?!
+
+def checkDB():
+# archlinux hack 
+	if os.path.exists("/home/httpd/html/pint/pint8.db"):
+		bd = "/home/httpd/html/pint/pint8.db"
+		return bd
+# debian way hack..
+	elif  os.path.exists("/var/www/pint/pint8.db"):
+		bd = "/var/www/pint/pint8.db"
+		return bd
+	else:
+		return "BD not found!"
+	
 
 
 class Users:
 	
 	def __init__(self):
+		
+		bd = checkDB()
 		self.connect = sqlite.connect(bd, check_same_thread=False, isolation_level=None)		
 		#self.connect = sqlite.connect(bd)
 		self.cursor = self.connect.cursor()
 		
-		#self.cursor.execute("pragma temp_store_directory='/home/httpd/html/pint_mod'")
-		#self.cursor.execute("pragma temp_store=file")
+		
 
 
 	def insertUser(self, username, nick, password):
@@ -109,6 +123,7 @@ class Users:
 class Problems:
 	
 	def __init__(self):
+		bd = checkDB()
 		self.connect = sqlite.connect(bd, check_same_thread=False, isolation_level=None)
 		self.cursor = self.connect.cursor()
 
@@ -197,6 +212,7 @@ class Problems:
 class learnedTopic:
 	
 		def __init__(self):
+			bd = checkDB()
 			self.connect = sqlite.connect(bd, check_same_thread=False)
 			self.cursor = self.connect.cursor()
 
@@ -250,6 +266,7 @@ class learnedTopic:
 class solvedProblems:
 	
 	def __init__(self):
+		bd = checkDB()
 		self.connect = sqlite.connect(bd, check_same_thread=False)
 		self.cursor = self.connect.cursor()
 
@@ -291,6 +308,7 @@ class solvedProblems:
 class Topic:
 
 	def __init__(self):
+		bd = checkDB()
 		self.connect = sqlite.connect(bd, check_same_thread=False)
 		self.cursor = self.connect.cursor()
 	
@@ -349,7 +367,7 @@ class Examples:
 	
 	
 	def __init__(self):
-		
+		bd = checkDB()
 		self.connect = sqlite.connect(bd, check_same_thread=False)
 		self.cursor = self.connect.cursor()
 	
