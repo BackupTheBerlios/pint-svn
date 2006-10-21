@@ -168,7 +168,7 @@ class Problems:
 			
 				# remove from Problem and learnTopic tables..
 				self.cursor.execute("delete from Problem where problemTitle=:prog_title", locals())
-				self.cursor.execute("delete from learnedTopic where topicName=:prog_title", locals())
+				self.cursor.execute("delete from solvedProb where problemTitle=:prog_title", locals())
 				self.connect.commit()
 
 				return 0
@@ -271,15 +271,15 @@ class solvedProblems:
 		self.cursor = self.connect.cursor()
 
 	def addSolvedProb(self, nick, prob_title):
-		try:
+		#try:
 			
 			#self.cursor.execute("select * from solvedProb where problemTitle=:prob_title", locals())
 			#if self.cursor.fetchall() != []: 
 			self.cursor.execute("insert into solvedProb (nickname, problemTitle) values (?, ?)", (nick, prob_title))
 			self.connect.commit()
 			return 0	
-		except:
-			pass
+		#except:
+		#	pass
 
 	def isLearnedProblem(self, nick, problem):
 			

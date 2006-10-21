@@ -19,11 +19,11 @@ password text
 );
 CREATE TABLE learnedTopic (
 nickname text,
-topicName text primary key
+topicName text 
 );
 CREATE TABLE solvedProb (
 nickname text,
-problemTitle text primary key
+problemTitle text 
 );
 CREATE TABLE Examples(
 topic text primary key,
